@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav" </nav>
+        </header>
+
+        <main>
+
+            <div class="container">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Modificar</th>
+                            <th scope="col">Eliminar</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="table-group-divider" th:each="usuario: ${usuarios}">
+
+                        <tr>
+
+                            <th scope="row" th:text="${usuario.id}" ></th>
+                            <td th:text="${usuario.nombre}"></td>
+                            <td th:text="${usuario.rol}" style="font-weight: bold; color: red"></td>
+                            <td><a th:href="@{/administrador/usuarioDetalladoModificar/__${usuario.id}__}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a th:href="@{/administrador/persistirUsuarioEliminado/__${usuario.id}__}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+
+                        </tr>    
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </main>
+
+        <footer th:replace= "/fragments/footer :: footer" </footer>
+
+        <script th:replace= "/fragments/script :: script" </script>
+    </body>
+
+</html>

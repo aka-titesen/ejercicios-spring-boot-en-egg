@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav" </nav>
+        </header>
+
+        <main>
+
+            <div class="container">
+
+                <form th:action="@{/administrador/persistirPeriodistaModificado/__${periodista.id}__}"  method="POST">
+
+                    <input hidden th:value="${id}" name="id">
+
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+
+                    <h1>Modifica un periodista</h1>
+                    <hr>
+
+                    <legend>NOMBRE</legend>
+                    <p th:text="${periodista.nombre}"></p>
+                    <legend>FECHA DE ALTA</legend>
+                    <p th:text="${periodista.alta}"></p>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">0.00</span>
+                        <input type="number" class="form-control" name="salario" th:value="${periodista.salario}"  style="font-weight: bold; color: red" aria-label="Cantidad en dólares (con punto y dos decimales)">
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+        <footer th:replace= "/fragments/footer :: footer" </footer>
+    </body>
+
+</html>
+

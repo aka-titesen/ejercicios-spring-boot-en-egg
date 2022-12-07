@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+
+        <main>
+
+            <div class="container">
+
+                <form th:action="@{/administrador/persistirPeriodista}"  method="POST" enctype="multipart/form-data">
+
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+
+                    <legend style="text-align: center">Registra un periodista</legend>
+
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Nombre</label>
+                        <input type="text" id="disabledTextInput" class="form-control" name="nombre" th:value="${nombre}" placeholder="Ingresa el nombre">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" th:value="${email}" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico con nadie más</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Suba la foto de perfil</label>
+                        <input class="form-control" type="file" id="formFile" name="archivo">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">0.00</span>
+                        <input type="number" class="form-control" name="salario" th:value="${salario}" aria-label="Cantidad en dólares (con punto y dos decimales)">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" th:value="${password}">
+                    </div>
+
+                    <div class="col-auto">
+                        <span id="passwordHelpInline" class="form-text">
+                            Debe tener 6 o más caracteres.
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="passwordDos" th:value="${passwordDos}">
+                    </div>
+
+                    <div class="col-auto">
+                        <span id="passwordHelpInline" class="form-text">
+                            Debe tener 6 o más caracteres.
+                        </span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

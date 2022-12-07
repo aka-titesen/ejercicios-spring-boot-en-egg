@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav" </nav>
+        </header>
+
+        <main>
+
+            <div class="container">
+
+                <form th:action="@{/administrador/persistirUsuarioModificado/__${usuario.id}__}"  method="POST">
+
+                    <input hidden th:value="${id}" name="id">
+
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+
+                    <h1>Modifica un usuario</h1>
+                    <hr>
+
+                    <legend>NOMBRE</legend>
+                    <p th:text="${usuario.nombre}"></p>
+                    <legend>ROL</legend>
+                    <p th:text="${usuario.rol}" style="font-weight: bold; color: red"></p>
+                    <legend>FECHA DE ALTA</legend>
+                    <p th:text="${usuario.alta}"></p>
+                    <legend>MODIFICAR EL ROL</legend>
+
+                    <div class="form-group my-3">
+                        <select name="rol">
+                            <option>Seleccionar rol</option>
+                            <option  th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}" ></option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+        <footer th:replace= "/fragments/footer :: footer" </footer>
+    </body>
+
+</html>
+

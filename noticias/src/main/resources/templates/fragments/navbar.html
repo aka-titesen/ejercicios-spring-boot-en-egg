@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<nav class="navegacion">
+    <ul class="menu">
+        <li ><a th:href="@{/login}"><button th:if="${session.usuarioSesion == null}" type="button" class="btn btn-success">Inicia sesión</button></a></li>
+        <li><a th:href="@{/registrarUsuario}"><button th:if="${session.usuarioSesion == null}" type="button" class="btn btn-dark">Registrate</button></a></li>
+        <li sec:authorize="hasRole('PERIODISTA')">
+            <a href="#">Gestionar noticias</a>
+            <ul class="submenu">
+                <li><a th:href="@{/periodista/registrarNoticia}">Crear noticia</a></li>
+                <li><a th:href="@{/periodista/listarNoticiasModificar}">Modificar noticias</a></li>
+                <li><a th:href="@{/listarNoticias}">Listar noticias</a></li>
+            </ul>
+        </li>
+        <li sec:authorize="hasRole('ADMINISTRADOR')">
+            <a href="#">Gestionar usuarios</a>
+            <ul class="submenu">
+                <li><a th:href="@{/administrador/}">Crear un periodista</a></li>
+                <li><a th:href="@{/administrador/registrarAdministrador}">Crear un administrador</a></li>
+                <li><a th:href="@{/administrador/listarPeriodistasModificar}">Modificar periodistas</a></li>
+                <li><a th:href="@{/administrador/listarUsuariosModificar}">Modificar usuarios</a></li>
+            </ul>
+        </li>
+        <li th:if="${session.usuarioSesion != null }">
+            <a href="#" th:text="${session.usuarioSesion.nombre}"></a>
+            <ul class="submenu">
+                <li><a th:href="@{/editarPerfil}">Editar perfil</a></li>
+                <li><a th:href="@{/listarNoticias}" sec:authorize="hasAnyRole('ROLE_USUARIO', 'ROLE_PERIODISTA', 'ROLE_ADMINISTRADOR')">Listar Noticias</a></li>
+                <li><a th:href="@{/logout}">Salir</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+

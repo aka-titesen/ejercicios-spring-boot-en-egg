@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav" </nav>
+        </header>
+
+        <main>
+
+            <div class="container" th:object="${noticia}">
+                <h1 class="display-1" th:text="*{titulo}"></h1>
+                <small class="text-muted " th:text="*{alta}"></small>
+                <hr class="border border-primary border-3 opacity-75">
+                <img class="img-fluid" th:src="*{foto}" alt="Imagen de la noticia" style="float: left; margin: 0 4px;">
+                <p class="lead" th:text="*{cuerpo}" style="text-align: justify"></p>
+            </div>
+
+        </main>
+
+        <footer th:replace= "/fragments/footer :: footer" </footer>
+
+    </body>
+
+</html>
